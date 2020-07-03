@@ -45,7 +45,7 @@ pihole_backup.sh contents
 
 	#!/bin/bash
 	sudo systemctl stop pihole-FTL lighttpd
-	tar -czvf /mnt/Backup/pihole-$(date '+%F').tar.gz ~/pihole
+	sudo tar -czvf /mnt/Backup/pihole-$(date '+%F').tar.gz /etc/pihole
 	sudo systemctl start lighttpd pihole-FTL
 	find /mnt/Backup -name "pihole-*.tar.gz" -type f -mtime +7 -exec rm -f {} \;
 
