@@ -44,10 +44,14 @@ The mount command will read the contents of **/etc/fstab** and mount the share.
 pihole_backup.sh contents
 
 	#!/bin/bash
-	sudo systemctl stop pihole-FTL lighttpd
-	sudo tar -czvf /mnt/Backup/pihole-$(date '+%F').tar.gz /etc/pihole
-	sudo systemctl start lighttpd pihole-FTL
+	mkdir /home/pi/pihole-$(date '+%F')
+	cd /home/pi/pihole-$(date '+%F')
+	pihole -a -t
+	sqlite3 /etc/pihole/pihole-FTL.db ".backup /home/pi/pihole-$(date '+%F')/pihole-FTL.db.backup"
+	tar -czvf /home/pi/pihole-$(date '+%F').tar.gz /home/pi/pihole-$(date '+%F') --remove-files
+	mv /home/pi/pihole-$(date '+%F').tar.gz /mnt/Backup/
 	find /mnt/Backup -name "pihole-*.tar.gz" -type f -mtime +7 -exec rm -f {} \;
+
 
 `chmod u+x ~/pihole_backup.sh`  
 
