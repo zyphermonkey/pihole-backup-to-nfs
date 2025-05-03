@@ -15,8 +15,8 @@ sudo mount /mnt/Backup
 
 mkdir /mnt/Backup/pihole-$(date '+%F')
 cd /mnt/Backup/pihole-$(date '+%F')
-pihole -a -t
-sqlite3 /etc/pihole/pihole-FTL.db ".backup /mnt/Backup/pihole-$(date '+%F')/pihole-FTL.db.backup"
+pihole-FTL --teleporter
+# sqlite3 /etc/pihole/pihole-FTL.db ".backup /mnt/Backup/pihole-$(date '+%F')/pihole-FTL.db.backup"
 # tar -czvf /mnt/Backup/pihole-$(date '+%F').tar.gz /mnt/Backup/pihole-$(date '+%F') --remove-files
 cd
 tar -czvf /mnt/Backup/pihole-$(date '+%F').tar.gz /mnt/Backup/pihole-$(date '+%F')
